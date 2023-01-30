@@ -51,7 +51,33 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Form to edit student
+                <form action="" method="post" id="edit-form">
+
+                    <div id="edit-error" class="text-danger"></div>
+                    <div id="edit-success" class="text-success"></div>
+
+                    <div class="mb-3">
+                        <label for="edit-name">Name</label>
+                        <input type="text" class="form-control" name="edit-name" id="edit-name" placeholder="Enter your name!">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Gender</label>
+                        <br>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="edit-gender" id="male" value="Male">
+                            <label class="form-check-label" for="male">Male</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="edit-gender" id="female" value="Female">
+                            <label class="form-check-label" for="female">Female</label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <input type="submit" value="Submit" class="btn btn-primary" id="add-submit">
+                    </div>
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

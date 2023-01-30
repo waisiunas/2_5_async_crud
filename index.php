@@ -121,6 +121,7 @@
                         } else if (result.success) {
                             addSuccessElement.innerText = result.success;
                             addFormElement.reset();
+                            showStudents();
                         } else if (result.error) {
                             addErrorElement.innerText = result.error;
                         } else {
