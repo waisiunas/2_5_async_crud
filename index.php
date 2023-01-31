@@ -158,11 +158,134 @@
         }
 
         function editStudent(id) {
-            console.log('I am edit function for student' + id);
+            const data = {
+                id: id,
+                submit: 1
+            }
+
+            fetch('./single-student.php', {
+                    method: 'POST',
+                    body: JSON.stringify(data),
+                    headers: {
+                        'Content-Type': 'application.json'
+                    }
+                })
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(result) {
+                    const editNameElement = document.getElementById('edit-name');
+                    const maleElement = document.getElementById('edit-male');
+                    const femaleElement = document.getElementById('edit-female');
+
+                    // editNameElement.value = result['name'];
+                    editNameElement.setAttribute('value', result['name']);
+
+                    if (result['gender'].toLowerCase() == 'male') {
+                        maleElement.checked = true;
+                    } else {
+                        femaleElement.checked = true;
+                    }
+                })
+
+            const editFormElement = document.getElementById('edit-form');
+            const editErrorElement = document.getElementById('edit-error');
+            const editSuccessElement = document.getElementById('edit-success');
+
+            editFormElement.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const editNameElement = document.getElementById('edit-name');
+                const editGenderElement = document.querySelector('input[name="edit-gender"]:checked');
+
+                let editNameValue = editNameElement.value;
+                let editGenderValue;
+
+                if (editGenderElement) {
+                    editGenderValue = editGenderElement.value;
+                }
+
+                editErrorElement.innerText = '';
+                editNameElement.classList.remove('is-invalid');
+
+
+                if (editNameValue == "" || editNameValue === undefined) {
+                    editErrorElement.innerText = 'Please provide your name!';
+                    editNameElement.classList.add('is-invalid');
+                } else if (editGenderValue == "" || editGenderValue === undefined) {
+                    editErrorElement.innerText = 'Please provide your gender!';
+                } else {
+                    const data = {
+                        name: editNameValue,
+                        gender: editGenderValue,
+                        id: id,
+                        submit: 1
+                    }
+
+                    fetch('./edit-student.php', {
+                            method: 'POST',
+                            body: JSON.stringify(data),
+                            headers: {
+                                'Content-Type': 'application.json'
+                            }
+                        })
+                        .then(function(response) {
+                            return response.json();
+                        })
+                        .then(function(result) {
+                            if (result.nameError) {
+                                editErrorElement.innerText = result.nameError;
+                                editNameElement.classList.add('is-invalid');
+                            } else if (result.genderError) {
+                                editErrorElement.innerText = result.genderError;
+                            } else if (result.success) {
+                                editSuccessElement.innerText = result.success;
+                                showStudents();
+                            } else if (result.error) {
+                                editErrorElement.innerText = result.error;
+                            } else {
+                                editErrorElement.innerText = 'Something went wrong';
+                            }
+                        })
+                }
+            })
+
         }
 
         function deleteStudent(id) {
-            console.log('I am delete function for student' + id);
+            const deleteFormElement = document.getElementById('delete-form');
+            const deleteErrorElement = document.getElementById('delete-error');
+            const deleteSuccessElement = document.getElementById('delete-success');
+
+            deleteFormElement.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const data = {
+                    id: id,
+                    submit: 1
+                }
+
+                fetch('./delete-student.php', {
+                        method: 'POST',
+                        body: JSON.stringify(data),
+                        headers: {
+                            'Content-Type': 'application.json'
+                        }
+                    })
+                    .then(function(response) {
+                        return response.json();
+                    })
+                    .then(function(result) {
+                        if (result.success) {
+                            deleteSuccessElement.innerText = result.success;
+                            showStudents();
+                        } else if (result.error) {
+                            deleteErrorElement.innerText = result.error;
+                        } else {
+                            deleteErrorElement.innerText = 'Something went wrong';
+                        }
+                    })
+            })
         }
     </script>
 </body>

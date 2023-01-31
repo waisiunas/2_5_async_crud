@@ -21,12 +21,12 @@
                         <label class="form-label">Gender</label>
                         <br>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="add-gender" id="male" value="Male" checked>
-                            <label class="form-check-label" for="male">Male</label>
+                            <input class="form-check-input" type="radio" name="add-gender" id="add-male" value="Male" checked>
+                            <label class="form-check-label" for="add-male">Male</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="add-gender" id="female" value="Female">
-                            <label class="form-check-label" for="female">Female</label>
+                            <input class="form-check-input" type="radio" name="add-gender" id="add-female" value="Female">
+                            <label class="form-check-label" for="add-female">Female</label>
                         </div>
                     </div>
 
@@ -65,17 +65,17 @@
                         <label class="form-label">Gender</label>
                         <br>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="edit-gender" id="male" value="Male">
-                            <label class="form-check-label" for="male">Male</label>
+                            <input class="form-check-input" type="radio" name="edit-gender" id="edit-male" value="Male">
+                            <label class="form-check-label" for="edit-male">Male</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="edit-gender" id="female" value="Female">
-                            <label class="form-check-label" for="female">Female</label>
+                            <input class="form-check-input" type="radio" name="edit-gender" id="edit-female" value="Female">
+                            <label class="form-check-label" for="edit-female">Female</label>
                         </div>
                     </div>
 
                     <div>
-                        <input type="submit" value="Submit" class="btn btn-primary" id="add-submit">
+                        <input type="submit" value="Submit" class="btn btn-primary" id="edit-submit">
                     </div>
                 </form>
             </div>
@@ -95,7 +95,19 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Form to delete student
+                <form action="" method="post" id="delete-form">
+
+                    <div id="delete-error" class="text-danger"></div>
+                    <div id="delete-success" class="text-success"></div>
+
+                    <div class="mb-3">
+                        Are you sure, you want to delete this?
+                    </div>
+
+                    <div>
+                        <input type="submit" value="Delete" class="btn btn-danger" id="delete-submit">
+                    </div>
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
